@@ -7,6 +7,8 @@ import { FaRegMoon } from "react-icons/fa";
 import { useAppDispatch, useAppSelectore } from "../../redux/reduxHooks";
 
 const TopActionElement = () => {
+  console.log("topelement");
+  
   const { theme } = useAppSelectore((state) => state.uiManagerReduser);
   const dispatch = useAppDispatch();
   return (
