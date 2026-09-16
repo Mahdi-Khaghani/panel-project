@@ -3,8 +3,6 @@ import { useAppDispatch } from "../../redux/reduxHooks";
 import { setShowSidebar } from "../../redux/ui-management/uiManagement";
 
 const Header = () => {
-  console.log("header");
-  
   const dispatch = useAppDispatch()
   return (
     <section

@@ -7,8 +7,6 @@ import { IoEllipsisHorizontalCircle } from "react-icons/io5";
 import SidebarContainer from "../../components/container/SidebarContainer";
 
 const Sidebar = () => {
-  console.log("sidebar");
-
   return (
     <SidebarContainer>
       <div className="h-full w-full ">

@@ -4,8 +4,6 @@ import Categories from "../../pages/categories/Categories";
 import Tasks from "../../pages/tasks/Tasks";
 
 const Content = () => {
-  console.log("content");
-  
   return (
     <section
       id="content"
