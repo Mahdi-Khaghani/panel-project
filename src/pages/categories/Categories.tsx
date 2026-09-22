@@ -3,22 +3,29 @@ import { getTaskCategoryServices } from "../../services/taskCategory";
 import type { CategoryListItemType } from "../../types/taskCategory";
 import { convertMiladi2Jalali } from "../../utils/dataUtils";
 import { BsPencil, BsTrash } from "react-icons/bs";
+import { successToast } from "../../utils/toastUtils";
+
 
 const Categories = () => {
   const [categories, setCategories] = useState<CategoryListItemType[]>([]);
   const handleGetTaskCategories = async () => {
     const data = await getTaskCategoryServices();
-    setCategories(data);
+    if (data) {
+      setCategories(data);
+      successToast()
+    }
   };
   useEffect(() => {
     handleGetTaskCategories();
   }, []);
   return (
     <div className="mt-6 md:mt-0">
-        <div className="flex p-1 justify-between items-center">
+      <div className="flex p-1 justify-between items-center">
         <h1 className="py-5 text-lg font-bold">لیست دسته بندی وظایف</h1>
-        <button className="text-white cursor-pointer hover:bg-sky-600 bg-sky-500 rounded-lg px-3 py-1">افزودن دسته بندی</button>
-        </div>
+        <button className="text-white cursor-pointer hover:bg-sky-600 bg-sky-500 rounded-lg px-3 py-1">
+          افزودن دسته بندی
+        </button>
+      </div>
       <table className="text-center w-full rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-600">
         <thead>
           <tr className="border-b dark:border-b-gray-500 h-12">
@@ -37,14 +44,16 @@ const Categories = () => {
             >
               <td className="px-2 md:px-3 hidden md:table-cell">{item.id}</td>
               <td className="px-2 md:px-3">{item.title}</td>
-              <td className="px-2 md:px-3 hidden md:table-cell">{item.description}</td>
+              <td className="px-2 md:px-3 hidden md:table-cell">
+                {item.description}
+              </td>
               <td className="px-2 md:px-3">
                 {convertMiladi2Jalali(item.createdAt)}
               </td>
               <td>
                 <span className="px-2 md:px-3 flex justify-center items-center gap-2 h-full">
-                <BsTrash className="text-red-600 cursor-pointer"/>
-                <BsPencil className="text-gray-600 cursor-pointer dark:text-gray-400"/>
+                  <BsTrash className="text-red-600 cursor-pointer" />
+                  <BsPencil className="text-gray-600 cursor-pointer dark:text-gray-400" />
                 </span>
               </td>
             </tr>

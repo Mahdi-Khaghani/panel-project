@@ -9,10 +9,7 @@ import { BrowserRouter } from "react-router";
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Provider store={store}>
-      <StrictMode>
-        <App />
-      </StrictMode>
-      ,
+      <App />,
     </Provider>
     ,
   </BrowserRouter>,

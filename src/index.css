@@ -15,3 +15,7 @@
   direction: rtl;
   font-family: "BYekan";
 }
+
+.Toastify_toast {
+  font-family: "BYekan" !important;
+}

@@ -1,5 +1,8 @@
 export const getTaskCategoryServices = async () => {
   const response = await fetch("http://localhost:3001/taskCategories");
-  const res = await response.json();
-  return res;
+  if(response.ok){
+    const res = await response.json();
+    return res;
+  }
+  return null
 };
