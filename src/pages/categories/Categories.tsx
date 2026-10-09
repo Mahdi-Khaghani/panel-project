@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
-import { getTaskCategoryServices } from "../../services/taskCategory";
+import {
+  addTaskCategoryService,
+  getTaskCategoryServices,
+} from "../../services/taskCategory";
 import type { CategoryListItemType } from "../../types/taskCategory";
 import { convertMiladi2Jalali } from "../../utils/dataUtils";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { successToast } from "../../utils/toastUtils";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Categories = () => {
   const [categories, setCategories] = useState<CategoryListItemType[]>([]);
@@ -12,9 +22,17 @@ const Categories = () => {
     const data = await getTaskCategoryServices();
     if (data) {
       setCategories(data);
-      successToast()
+      successToast();
     }
   };
+  const handleAddTaskCategory = async () => {
+    const res = await addTaskCategoryService();
+    if (res) {
+      setCategories([...categories, res.data]);
+      successToast();
+    }
+  };
+
   useEffect(() => {
     handleGetTaskCategories();
   }, []);
@@ -22,7 +40,10 @@ const Categories = () => {
     <div className="mt-6 md:mt-0">
       <div className="flex p-1 justify-between items-center">
         <h1 className="py-5 text-lg font-bold">لیست دسته بندی وظایف</h1>
-        <button className="text-white cursor-pointer hover:bg-sky-600 bg-sky-500 rounded-lg px-3 py-1">
+        <button
+          className="text-white cursor-pointer hover:bg-sky-600 bg-sky-500 rounded-lg px-3 py-1"
+          onClick={() => handleAddTaskCategory()}
+        >
           افزودن دسته بندی
         </button>
       </div>
@@ -60,6 +81,18 @@ const Categories = () => {
           ))}
         </tbody>
       </table>
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
